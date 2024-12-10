@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 
 
@@ -12,6 +13,7 @@ class SecFragment : Fragment(),OnFregmentDataListener {
     private lateinit var onFregmentDataListener: OnFregmentDataListener
     private lateinit var redactCountTV:TextView
     private lateinit var redacttextNoteET:TextView
+    private lateinit var redactBTN:Button
 
 
 
@@ -26,6 +28,10 @@ class SecFragment : Fragment(),OnFregmentDataListener {
         val view = inflater.inflate(R.layout.fragment_sec, container, false)
         redactCountTV=view.findViewById(R.id.redactCountTV)
         redacttextNoteET=arguments?.getString("textMes")
+        redactBTN.setOnClickListener {
+
+            TO DO
+        }
 
 
 
