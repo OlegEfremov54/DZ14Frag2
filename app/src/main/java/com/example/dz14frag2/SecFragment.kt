@@ -45,6 +45,7 @@ class SecFragment : Fragment(),OnFregmentDataListener {
     override fun onData(data: String) {
         val bundle = Bundle()
         bundle.putString("newText", data)
+        bundle.putString("oldText", redacttextNoteET.toString())
 
         val transaction = this.fragmentManager?.beginTransaction()
         val festFragment = FragmentFest()

@@ -85,10 +85,46 @@ class FragmentFest : Fragment() {
             count = ((textMess[textMess.size - 1].count) + 1)
             generateCountTV.text = "№ $count"
             textNoteET.text.clear()
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val newText = arguments?.getString("newText")
+        if (newText!=null){
+            textNoteET.text = newText.toString()
+            val key = arguments?.getString("oldText")
+            var index = search(textMess, key.toString())
+            val newTexMes = TextMes(
+                count = textMess[index].count,
+                text = newText,
+                date = textMess[index].date,
+                checkBoxStart = textMess[index].checkBoxStart
+            )
+            swap(textMess, index, newTexMes)
+
+            val adapter = MyAdapter(textMess)
+            recyclerViewRV.adapter = adapter
+            adapter?.notifyDataSetChanged()
+
 
 
         }
 
+    }
+
+    fun swap(textMes: MutableList<TextMes>, index:Int, newTexMes: TextMes){
+        textMes.add(index + 1,newTexMes)
+        textMes.removeAt(index)
+
+    }
+
+    fun search ( textMes: MutableList<TextMes>, key:String) {
+        var result = -1
+        for (i in textMes.indices){
+            if (key == textMess[i].text) result=i
+        }
     }
 
 }
