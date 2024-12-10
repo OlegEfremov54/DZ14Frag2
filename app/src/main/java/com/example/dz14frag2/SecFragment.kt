@@ -29,9 +29,13 @@ class SecFragment : Fragment(),OnFregmentDataListener {
         val view = inflater.inflate(R.layout.fragment_sec, container, false)
         redactCountTV=view.findViewById(R.id.redactCountTV)
         redacttextNoteET = arguments?.getString("textMes")
+        redactBTN=view.findViewById(R.id.redactBTN)
 
 
         redactBTN.setOnClickListener {
+            if (redacttextNoteET.text.isEmpty()) {
+                return@setOnClickListener
+            }
 
             val value = redacttextNoteET.text
             onData(value.toString())

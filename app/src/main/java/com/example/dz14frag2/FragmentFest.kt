@@ -91,9 +91,9 @@ class FragmentFest : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val newText = arguments?.getString("newText")
+        val newText:String? = arguments?.getString("newText")
         if (newText!=null){
-            textNoteET.text = newText.toString()
+            textNoteET.text = newText
             val key = arguments?.getString("oldText")
             var index = search(textMess, key.toString())
             val newTexMes = TextMes(
