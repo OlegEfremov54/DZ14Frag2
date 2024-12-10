@@ -1,5 +1,6 @@
 package com.example.dz14frag2
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,12 +9,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+
 import java.util.Date
 
 
 class FragmentFest : Fragment() {
+    private lateinit var onFregmentDataListener:OnFregmentDataListener
 
     private lateinit var addBTN: Button
 
@@ -31,6 +35,9 @@ class FragmentFest : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fest, container, false)
+
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,6 +60,16 @@ class FragmentFest : Fragment() {
 
         //Определяем что размеры фиксированные
         recyclerViewRV.setHasFixedSize(true)
+
+        adapter.setOnTextClickListener(object : MyAdapter.OnTextClickListener {
+            override fun OnTextClick(textMes: TextMes, position: Int) {
+                val itemSelected =position
+                onFregmentDataListener.onData(itemSelected.toString())
+            }
+
+        })
+
+
 
         //Кнопка Добавить
         addBTN.setOnClickListener {

@@ -13,9 +13,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),OnFregmentDataListener {
     private lateinit var toolbarMain: Toolbar
     private lateinit var addBTN: Button
 
@@ -71,5 +72,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onData(data: String) {
+        val bundle=Bundle()
+        bundle.putString("textMes", data)
+
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val secFragment = SecFragment()
+        secFragment.arguments = bundle
+        transaction.replace(R.id.festfragment,secFragment)
+        transaction.addToBackStack(null)
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        transaction.commit()
     }
 }

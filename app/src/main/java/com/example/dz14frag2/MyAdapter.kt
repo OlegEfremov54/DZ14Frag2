@@ -10,6 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 class MyAdapter (val textMess: MutableList<TextMes>) :
     RecyclerView.Adapter<MyAdapter.TextViewHolder>() {
 
+    private var onTextClickListener: OnTextClickListener? = null
+
+    interface OnTextClickListener {
+        fun OnTextClick (textMes: TextMes, position: Int)
+    }
+
     class TextViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val countTV: TextView = itemView.findViewById(R.id.countTV)
         val textTV: TextView = itemView.findViewById(R.id.textTV)
@@ -31,5 +37,14 @@ class MyAdapter (val textMess: MutableList<TextMes>) :
         holder.textTV.text = textMes.text
         holder.dateTV.text = textMes.date
         holder.checkBoxStartCB.isChecked = textMes.checkBoxStart
+        holder.itemView.setOnClickListener {
+            if (onTextClickListener != null) {
+                onTextClickListener!!.OnTextClick(textMes, position)
+            }
+        }
+    }
+
+    fun setOnTextClickListener(onTextClickListener: OnTextClickListener) {
+        this.onTextClickListener = onTextClickListener
     }
 }
