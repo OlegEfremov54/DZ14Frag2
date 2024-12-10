@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.FragmentTransaction
 
 
 class SecFragment : Fragment(),OnFregmentDataListener {
@@ -27,17 +28,34 @@ class SecFragment : Fragment(),OnFregmentDataListener {
 
         val view = inflater.inflate(R.layout.fragment_sec, container, false)
         redactCountTV=view.findViewById(R.id.redactCountTV)
-        redacttextNoteET=arguments?.getString("textMes")
+        redacttextNoteET = arguments?.getString("textMes")
+
+
         redactBTN.setOnClickListener {
 
-            TO DO
+            val value = redacttextNoteET.text
+            onData(value.toString())
         }
 
 
 
         return view
     }
-r
+
+    override fun onData(data: String) {
+        val bundle = Bundle()
+        bundle.putString("newText", data)
+
+        val transaction = this.fragmentManager?.beginTransaction()
+        val festFragment = FragmentFest()
+        festFragment.arguments = bundle
+        transaction?.replace(R.id.festfragment,festFragment)
+        transaction?.addToBackStack(null)
+        transaction?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        transaction?.commit()
+    }
+    }
+
 
 
 }
