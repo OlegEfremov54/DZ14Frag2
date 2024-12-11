@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 
 
 class SecFragment : Fragment(),OnFragmentDataListener {
-    private lateinit var onFregmentDataListener: OnFragmentDataListener
+    private lateinit var onFragmentDataListener: OnFragmentDataListener
     private lateinit var redactCountTV:TextView
     private lateinit var redacttextNoteET:TextView
     private lateinit var redactBTN:Button
@@ -26,7 +26,7 @@ class SecFragment : Fragment(),OnFragmentDataListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        onFregmentDataListener = requireActivity() as OnFragmentDataListener
+        onFragmentDataListener = requireActivity() as OnFragmentDataListener
 
         val view = inflater.inflate(R.layout.fragment_sec, container, false)
         redactCountTV=view.findViewById(R.id.redactCountTV)
