@@ -33,10 +33,8 @@ class FragmentFest : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_fest, container, false)
-
-
 
     }
 
@@ -63,23 +61,8 @@ class FragmentFest : Fragment() {
 
         adapter.setOnTextClickListener(object : MyAdapter.OnTextClickListener {
             override fun OnTextClick(textMes: TextMes, position: Int) {
-                val itemSelected =position
-                onFragmentDataListener.onData(itemSelected.toString())
 
-
-
-               // val bundle = Bundle().apply {
-               //     putString("textMes", textMess[position].text)
-               //     putInt("index", position)
-               // }
-               //val secFragment = SecFragment().apply {
-               //     arguments = bundle
-               // }
-                //parentFragmentManager.beginTransaction()
-                //    .replace(R.id.festfragment, secFragment)
-                //    .addToBackStack(null)
-                //    .commit()
-
+                onFragmentDataListener.onData(textMess[position].text)
 
             }
 

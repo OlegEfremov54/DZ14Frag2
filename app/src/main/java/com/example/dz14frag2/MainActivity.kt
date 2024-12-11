@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(),OnFragmentDataListener {
        val transaction = this.supportFragmentManager.beginTransaction()
        val secFragment = SecFragment()
        secFragment.arguments = bundle
-       transaction.replace(R.id.main,secFragment)
+       transaction.replace(R.id.festfragment,secFragment)
        transaction.addToBackStack(null)
        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
        transaction.commit()
