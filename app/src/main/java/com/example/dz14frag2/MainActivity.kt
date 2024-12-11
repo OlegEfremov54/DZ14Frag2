@@ -16,7 +16,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity(),OnFregmentDataListener {
+class MainActivity : AppCompatActivity(),OnFragmentDataListener {
     private lateinit var toolbarMain: Toolbar
     private lateinit var addBTN: Button
 
@@ -74,16 +74,15 @@ class MainActivity : AppCompatActivity(),OnFregmentDataListener {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onData(data: String) {
-        val bundle=Bundle()
-        bundle.putString("textMes", data)
-
-        val transaction = this.supportFragmentManager.beginTransaction()
-        val secFragment = SecFragment()
-        secFragment.arguments = bundle
-        transaction.replace(R.id.festfragment,secFragment)
-        transaction.addToBackStack(null)
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        transaction.commit()
+   override fun onData(data: String) {
+       val bundle=Bundle()
+       bundle.putString("textMes", data)
+       val transaction = this.supportFragmentManager.beginTransaction()
+       val secFragment = SecFragment()
+       secFragment.arguments = bundle
+       transaction.replace(R.id.main,secFragment)
+       transaction.addToBackStack(null)
+       transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+       transaction.commit()
     }
 }

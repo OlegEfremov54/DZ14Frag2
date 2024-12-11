@@ -10,11 +10,13 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentTransaction
 
 
-class SecFragment : Fragment(),OnFregmentDataListener {
-    private lateinit var onFregmentDataListener: OnFregmentDataListener
+class SecFragment : Fragment(),OnFragmentDataListener {
+    private lateinit var onFregmentDataListener: OnFragmentDataListener
     private lateinit var redactCountTV:TextView
     private lateinit var redacttextNoteET:TextView
     private lateinit var redactBTN:Button
+    private var position: Int? = 0
+    private var text:String? = null
 
 
 
@@ -24,14 +26,21 @@ class SecFragment : Fragment(),OnFregmentDataListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        onFregmentDataListener = requireActivity() as OnFregmentDataListener
+        onFregmentDataListener = requireActivity() as OnFragmentDataListener
 
         val view = inflater.inflate(R.layout.fragment_sec, container, false)
         redactCountTV=view.findViewById(R.id.redactCountTV)
-        redacttextNoteET = arguments?.getString("textMes")
+        position = arguments?.getInt("index")
+        text = arguments?.getString("textMes")
+
+
+        redacttextNoteET.setText(text)
+        redactCountTV.setText(position.toString())
+
+
+
+
         redactBTN=view.findViewById(R.id.redactBTN)
-
-
         redactBTN.setOnClickListener {
             if (redacttextNoteET.text.isEmpty()) {
                 return@setOnClickListener
@@ -50,11 +59,12 @@ class SecFragment : Fragment(),OnFregmentDataListener {
         val bundle = Bundle()
         bundle.putString("newText", data)
         bundle.putString("oldText", redacttextNoteET.toString())
+        bundle.putString("index", redactCountTV.toString())
 
         val transaction = this.fragmentManager?.beginTransaction()
         val festFragment = FragmentFest()
         festFragment.arguments = bundle
-        transaction?.replace(R.id.festfragment,festFragment)
+        transaction?.replace(R.id.main,festFragment)
         transaction?.addToBackStack(null)
         transaction?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         transaction?.commit()
@@ -63,4 +73,3 @@ class SecFragment : Fragment(),OnFregmentDataListener {
 
 
 
-}

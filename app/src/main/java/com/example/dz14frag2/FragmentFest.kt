@@ -17,7 +17,7 @@ import java.util.Date
 
 
 class FragmentFest : Fragment() {
-    private lateinit var onFregmentDataListener:OnFregmentDataListener
+    private lateinit var onFragmentDataListener: OnFragmentDataListener
 
     private lateinit var addBTN: Button
 
@@ -64,10 +64,27 @@ class FragmentFest : Fragment() {
         adapter.setOnTextClickListener(object : MyAdapter.OnTextClickListener {
             override fun OnTextClick(textMes: TextMes, position: Int) {
                 val itemSelected =position
-                onFregmentDataListener.onData(itemSelected.toString())
+                onFragmentDataListener.onData(itemSelected.toString())
+
+
+
+               // val bundle = Bundle().apply {
+               //     putString("textMes", textMess[position].text)
+               //     putInt("index", position)
+               // }
+               //val secFragment = SecFragment().apply {
+               //     arguments = bundle
+               // }
+                //parentFragmentManager.beginTransaction()
+                //    .replace(R.id.festfragment, secFragment)
+                //    .addToBackStack(null)
+                //    .commit()
+
+
             }
 
         })
+
 
 
 
@@ -93,16 +110,18 @@ class FragmentFest : Fragment() {
         super.onResume()
         val newText:String? = arguments?.getString("newText")
         if (newText!=null){
-            textNoteET.text = newText
-            val key = arguments?.getString("oldText")
-            var index = search(textMess, key.toString())
-            val newTexMes = TextMes(
-                count = textMess[index].count,
-                text = newText,
-                date = textMess[index].date,
-                checkBoxStart = textMess[index].checkBoxStart
-            )
-            swap(textMess, index, newTexMes)
+            textNoteET.setText(newText)
+            val key = arguments?.getString("oldText") ?: return
+            val index = search(textMess, key)
+            if (index != -1) {
+                val newTexMes = TextMes(
+                    count = textMess[index].count,
+                    text = newText,
+                    date = textMess[index].date,
+                    checkBoxStart = textMess[index].checkBoxStart
+                )
+                swap(textMess, index, newTexMes)
+            }
 
             val adapter = MyAdapter(textMess)
             recyclerViewRV.adapter = adapter
@@ -120,11 +139,9 @@ class FragmentFest : Fragment() {
 
     }
 
-    fun search ( textMes: MutableList<TextMes>, key:String) {
-        var result = -1
-        for (i in textMes.indices){
-            if (key == textMess[i].text) result=i
-        }
+    fun search(textMes: MutableList<TextMes>, key: String): Int {
+        return textMes.indexOfFirst { it.text == key }
     }
+
 
 }

@@ -1,5 +1,5 @@
 package com.example.dz14frag2
 
-interface OnFregmentDataListener {
+interface OnFragmentDataListener {
     fun onData(data:String )
 }
