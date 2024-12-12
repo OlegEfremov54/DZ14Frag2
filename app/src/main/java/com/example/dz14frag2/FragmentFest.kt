@@ -61,6 +61,8 @@ class FragmentFest : Fragment() {
         //Определяем что размеры фиксированные
         recyclerViewRV.setHasFixedSize(true)
 
+        onFragmentDataListener = requireActivity() as  MainActivity
+
         adapter.setOnTextClickListener(object : MyAdapter.OnTextClickListener {
             override fun OnTextClick(textMes: TextMes, position: Int) {
 
