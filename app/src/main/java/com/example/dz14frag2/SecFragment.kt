@@ -1,5 +1,6 @@
 package com.example.dz14frag2
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,7 +16,7 @@ import androidx.fragment.app.FragmentTransaction
 class SecFragment : Fragment(),OnFragmentDataListener {
     private lateinit var onFragmentDataListener: OnFragmentDataListener
     private lateinit var redactCountTV:TextView
-    private lateinit var redacttextNoteET:EditText
+    private lateinit var redactTextNoteET:EditText
     private lateinit var redactBTN:Button
     private var position: Int? = 0
     private var text:String? = null
@@ -23,6 +24,7 @@ class SecFragment : Fragment(),OnFragmentDataListener {
 
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,12 +34,12 @@ class SecFragment : Fragment(),OnFragmentDataListener {
 
         val view = inflater.inflate(R.layout.fragment_sec, container, false)
         redactCountTV=view.findViewById(R.id.redactCountTV)
-        redacttextNoteET = view.findViewById(R.id.redacttextNoteET)
+        redactTextNoteET = view.findViewById(R.id.redactTextNoteET)
         position = arguments?.getInt("index")
         text = arguments?.getString("textMes")
 
 
-        redacttextNoteET.setText(text)
+        redactTextNoteET.setText(text)
         redactCountTV.setText(position.toString())
 
 
@@ -45,12 +47,11 @@ class SecFragment : Fragment(),OnFragmentDataListener {
 
         redactBTN=view.findViewById(R.id.redactBTN)
         redactBTN.setOnClickListener {
-            redacttextNoteET = view.findViewById(R.id.redacttextNoteET)
-            if (redacttextNoteET.text.isEmpty()) {
+            if (redactTextNoteET.text.isEmpty()) {
                 return@setOnClickListener
             }
 
-            val value = redacttextNoteET.text
+            val value = redactTextNoteET.text
             onData(value.toString())
         }
 
@@ -62,7 +63,7 @@ class SecFragment : Fragment(),OnFragmentDataListener {
     override fun onData(data: String) {
         val bundle = Bundle()
         bundle.putString("newText", data)
-        bundle.putString("oldText", redacttextNoteET.toString())
+        bundle.putString("oldText", redactTextNoteET.toString())
         bundle.putString("index", redactCountTV.toString())
 
         val transaction = this.fragmentManager?.beginTransaction()
