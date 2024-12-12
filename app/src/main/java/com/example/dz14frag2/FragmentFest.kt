@@ -67,12 +67,8 @@ class FragmentFest : Fragment() {
             override fun OnTextClick(textMes: TextMes, position: Int) {
 
                 onFragmentDataListener.onData(textMess[position].text, position)
-
             }
-
         })
-
-
 
 
         //Кнопка Добавить
@@ -99,20 +95,10 @@ class FragmentFest : Fragment() {
         val position = arguments?.getInt("position")
 
         if (newText!=null){
-            textNoteET.setText(newText)
-            val key = arguments?.getString("oldText") ?: return
 
+            textMess[position!!].text = newText
 
-           // val index = search(textMess, key)
-           // if (index != -1) {
-                val newTexMes = TextMes(
-                    count = textMess[position!!].count,
-                    text = newText,
-                    date = textMess[position].date,
-                    checkBoxStart = textMess[position].checkBoxStart
-                )
-                textMess[position!!] = newTexMes
-                recyclerViewRV.adapter?.notifyItemChanged(position)
+            recyclerViewRV.adapter?.notifyItemChanged(position)
             }
 
 

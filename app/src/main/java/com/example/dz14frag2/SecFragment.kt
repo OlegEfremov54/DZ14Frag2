@@ -51,9 +51,10 @@ class SecFragment : Fragment(),OnFragmentDataListener {
             }
 
             val value = redactTextNoteET.text.toString()
+            val position = redactCountTV.text.toString().toIntOrNull() ?: 0
 
 
-            onData(value.toString(), position!!)
+            onData(value, position!!)
         }
 
 
@@ -65,7 +66,8 @@ class SecFragment : Fragment(),OnFragmentDataListener {
         val bundle = Bundle()
         bundle.putString("newText", data)
         bundle.putString("oldText", redactTextNoteET.text.toString())
-        bundle.putString("position", redactCountTV.text.toString())
+        bundle.putInt("position", position)
+
 
         //bundle.putString("oldText", redactTextNoteET.toString())
         //bundle.putString("index", redactCountTV.toString())
