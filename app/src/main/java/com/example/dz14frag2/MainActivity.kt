@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(),OnFragmentDataListener {
         return super.onOptionsItemSelected(item)
     }
 
-   override fun onData(data: String) {
+   override fun onData(data: String, index: Int) {
        val bundle=Bundle()
        bundle.putString("textMes", data)
        val transaction = this.supportFragmentManager.beginTransaction()

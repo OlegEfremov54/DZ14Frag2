@@ -66,7 +66,7 @@ class FragmentFest : Fragment() {
         adapter.setOnTextClickListener(object : MyAdapter.OnTextClickListener {
             override fun OnTextClick(textMes: TextMes, position: Int) {
 
-                onFragmentDataListener.onData(textMess[position].text)
+                onFragmentDataListener.onData(textMess[position].text, position)
 
             }
 
@@ -96,23 +96,24 @@ class FragmentFest : Fragment() {
     override fun onResume() {
         super.onResume()
         val newText:String? = arguments?.getString("newText")
+        val position = arguments?.getInt("position")
+
         if (newText!=null){
             textNoteET.setText(newText)
             val key = arguments?.getString("oldText") ?: return
-            val index = search(textMess, key)
-            if (index != -1) {
-                val newTexMes = TextMes(
-                    count = textMess[index].count,
-                    text = newText,
-                    date = textMess[index].date,
-                    checkBoxStart = textMess[index].checkBoxStart
-                )
-                swap(textMess, index, newTexMes)
-            }
 
-            val adapter = MyAdapter(textMess)
-            recyclerViewRV.adapter = adapter
-            adapter?.notifyDataSetChanged()
+
+           // val index = search(textMess, key)
+           // if (index != -1) {
+                val newTexMes = TextMes(
+                    count = textMess[position!!].count,
+                    text = newText,
+                    date = textMess[position].date,
+                    checkBoxStart = textMess[position].checkBoxStart
+                )
+                textMess[position!!] = newTexMes
+                recyclerViewRV.adapter?.notifyItemChanged(position)
+            }
 
 
 
@@ -121,6 +122,7 @@ class FragmentFest : Fragment() {
     }
 
     fun swap(textMes: MutableList<TextMes>, index:Int, newTexMes: TextMes){
+
         textMes.add(index + 1,newTexMes)
         textMes.removeAt(index)
 
@@ -131,4 +133,3 @@ class FragmentFest : Fragment() {
     }
 
 
-}

@@ -1,6 +1,7 @@
 package com.example.dz14frag2
 
 import android.annotation.SuppressLint
+import android.icu.text.Transliterator.Position
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -21,9 +22,6 @@ class SecFragment : Fragment(),OnFragmentDataListener {
     private var position: Int? = 0
     private var text:String? = null
 
-
-
-
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +33,7 @@ class SecFragment : Fragment(),OnFragmentDataListener {
         val view = inflater.inflate(R.layout.fragment_sec, container, false)
         redactCountTV=view.findViewById(R.id.redactCountTV)
         redactTextNoteET = view.findViewById(R.id.redactTextNoteET)
-        position = arguments?.getInt("index")
+        position = arguments?.getInt("position")
         text = arguments?.getString("textMes")
 
 
@@ -52,8 +50,10 @@ class SecFragment : Fragment(),OnFragmentDataListener {
                 return@setOnClickListener
             }
 
-            val value = redactTextNoteET.text
-            onData(value.toString())
+            val value = redactTextNoteET.text.toString()
+
+
+            onData(value.toString(), position!!)
         }
 
 
@@ -61,11 +61,14 @@ class SecFragment : Fragment(),OnFragmentDataListener {
         return view
     }
 
-    override fun onData(data: String) {
+    override fun onData(data: String, position: Int) {
         val bundle = Bundle()
         bundle.putString("newText", data)
-        bundle.putString("oldText", redactTextNoteET.toString())
-        bundle.putString("index", redactCountTV.toString())
+        bundle.putString("oldText", redactTextNoteET.text.toString())
+        bundle.putString("position", redactCountTV.text.toString())
+
+        //bundle.putString("oldText", redactTextNoteET.toString())
+        //bundle.putString("index", redactCountTV.toString())
 
         val transaction = this.fragmentManager?.beginTransaction()
         val festFragment = FragmentFest()
