@@ -47,6 +47,7 @@ class SecFragment : Fragment(),OnFragmentDataListener {
 
         redactBTN=view.findViewById(R.id.redactBTN)
         redactBTN.setOnClickListener {
+            redactTextNoteET = view.findViewById(R.id.redactTextNoteET)
             if (redactTextNoteET.text.isEmpty()) {
                 return@setOnClickListener
             }
