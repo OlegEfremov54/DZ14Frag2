@@ -26,8 +26,8 @@ class FragmentFest : Fragment() {
     private lateinit var generateCountTV: TextView
     private lateinit var textNoteET: EditText
 
-    private val textMess: MutableList<TextMes> = mutableListOf()
-    private var count: Int = 1
+    //private val textMess: MutableList<TextMes> = mutableListOf()
+    //private var count: Int = 1
 
 
     override fun onCreateView(

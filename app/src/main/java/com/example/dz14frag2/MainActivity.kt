@@ -16,6 +16,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 
+var textMess: MutableList<TextMes> = mutableListOf()
+var count: Int = 1
+
 class MainActivity : AppCompatActivity(),OnFragmentDataListener {
     private lateinit var toolbarMain: Toolbar
     private lateinit var addBTN: Button
@@ -24,8 +27,8 @@ class MainActivity : AppCompatActivity(),OnFragmentDataListener {
     private lateinit var generateCountTV: TextView
     private lateinit var textNoteET: EditText
 
-    private val textMess: MutableList<TextMes> = mutableListOf()
-    private var count: Int = 1
+    var textMess: MutableList<TextMes> = mutableListOf()
+    var count: Int = 1
 
 
     @SuppressLint("MissingInflatedId")
