@@ -1,7 +1,7 @@
 package com.example.dz14frag2
 
 import android.annotation.SuppressLint
-import android.content.Intent
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,13 +45,11 @@ class FragmentFest : Fragment() {
 
         //Привязываем кнопку Добавить
         addBTN = view.findViewById(R.id.addBTN)
-
         //Привязываем поля вывода инфы
         recyclerViewRV = view.findViewById(R.id.recyclerViewRV)
         generateCountTV = view.findViewById(R.id.generateCountTV)
         textNoteET = view.findViewById(R.id.textNoteET)
-
-        //Присваеваем номер сообщению
+        //Номер Заметки
         generateCountTV.text = "№ $count"
         //Запускаем менеджер
         recyclerViewRV.layoutManager =  LinearLayoutManager(requireContext())
@@ -63,12 +61,14 @@ class FragmentFest : Fragment() {
 
         onFragmentDataListener = requireActivity() as  MainActivity
 
+        //Слушатель нажатия на отдельную Заметку
         adapter.setOnTextClickListener(object : MyAdapter.OnTextClickListener {
             override fun OnTextClick(textMes: TextMes, position: Int) {
 
                 onFragmentDataListener.onData(textMess[position].text, position)
             }
         })
+
 
 
         //Кнопка Добавить
@@ -86,26 +86,23 @@ class FragmentFest : Fragment() {
             generateCountTV.text = "№ $count"
             textNoteET.text.clear()
         }
-
     }
 
+// Он Резуме для перезапуска фрагмента после редактирования
     override fun onResume() {
         super.onResume()
+        //Получаем данные
         val newText:String? = arguments?.getString("newText")
         val position = arguments?.getInt("position")
-
+        // вносим измененния
         if (newText!=null){
-
             textMess[position!!].text = newText
-
+            //обновляем список
             recyclerViewRV.adapter?.notifyItemChanged(position)
-            }
-
-
-
         }
-
     }
+}
+// Тестовые функции для замены Заметки - наверное не пригодятся
 
     fun swap(textMes: MutableList<TextMes>, index:Int, newTexMes: TextMes){
 

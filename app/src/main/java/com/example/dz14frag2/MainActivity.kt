@@ -15,27 +15,19 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
-
+// Инициируем массив данных чтоб видно было везде
 var textMess: MutableList<TextMes> = mutableListOf()
 var count: Int = 1
 
 class MainActivity : AppCompatActivity(),OnFragmentDataListener {
     private lateinit var toolbarMain: Toolbar
-    private lateinit var addBTN: Button
-
-    private lateinit var recyclerViewRV: RecyclerView
-    private lateinit var generateCountTV: TextView
-    private lateinit var textNoteET: EditText
-
-    var textMess: MutableList<TextMes> = mutableListOf()
-    var count: Int = 1
-
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        // Запускаем первый фрагмент
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.festfragment, FragmentFest())
@@ -76,6 +68,8 @@ class MainActivity : AppCompatActivity(),OnFragmentDataListener {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    //On data для перехода с первого фрагмента на фрагмент редактирования
 
    override fun onData(data: String, index: Int) {
        val bundle=Bundle()

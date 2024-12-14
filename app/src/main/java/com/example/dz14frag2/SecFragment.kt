@@ -30,54 +30,45 @@ class SecFragment : Fragment(),OnFragmentDataListener {
         Log.d("SecFragment", "OnCreateView")
         onFragmentDataListener = requireActivity() as OnFragmentDataListener
 
+        //Находим и привязываем поля и кнопки
         val view = inflater.inflate(R.layout.fragment_sec, container, false)
         redactCountTV=view.findViewById(R.id.redactCountTV)
         redactTextNoteET = view.findViewById(R.id.redactTextNoteET)
+        //Получаем данные из предыдущего фрагмента
         position = arguments?.getInt("position")
         text = arguments?.getString("textMes")
 
-
+        //Полученные данные заносим в поля
         redactTextNoteET.setText(text)
         redactCountTV.setText((position?.plus(1)).toString())
-
-
-
-
+        //Кнопка Редактировать
         redactBTN=view.findViewById(R.id.redactBTN)
+        //Слушатель
         redactBTN.setOnClickListener {
 
-
             val value = redactTextNoteET.text.toString()
-            val position = redactCountTV.text.toString().toInt()
-
-
             onData(value, position!!)
         }
-
-
-
         return view
     }
 
+    //Он Дата для перехода-возврата на Первый фрагмент
     override fun onData(data: String, position: Int) {
         val bundle = Bundle()
-        //bundle.putString("newText", data)
+       // Передаем данные в бангл
         bundle.putString("newText", redactTextNoteET.text.toString())
         bundle.putInt("position", position)
-
-
-        //bundle.putString("oldText", redactTextNoteET.toString())
-        //bundle.putString("index", redactCountTV.toString())
-
-        val transaction = this.fragmentManager?.beginTransaction()
+        //Транзакция
+        val transaction = parentFragmentManager.beginTransaction()
         val festFragment = FragmentFest()
         festFragment.arguments = bundle
-        transaction?.replace(R.id.main,festFragment)
+        transaction?.replace(R.id.festfragment,festFragment)
         transaction?.addToBackStack(null)
         transaction?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         transaction?.commit()
     }
-    }
+}
+
 
 
 
