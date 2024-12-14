@@ -45,7 +45,7 @@ class SecFragment : Fragment(),OnFragmentDataListener {
 
         redactBTN=view.findViewById(R.id.redactBTN)
         redactBTN.setOnClickListener {
-            redactTextNoteET = view.findViewById(R.id.redactTextNoteET)
+
             if (redactTextNoteET.text.isEmpty()) {
                 return@setOnClickListener
             }
@@ -64,8 +64,8 @@ class SecFragment : Fragment(),OnFragmentDataListener {
 
     override fun onData(data: String, position: Int) {
         val bundle = Bundle()
-        bundle.putString("newText", data)
-        bundle.putString("oldText", redactTextNoteET.text.toString())
+        //bundle.putString("newText", data)
+        bundle.putString("newText", redactTextNoteET.text.toString())
         bundle.putInt("position", position)
 
 
