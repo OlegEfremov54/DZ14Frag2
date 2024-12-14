@@ -51,7 +51,7 @@ class SecFragment : Fragment(),OnFragmentDataListener {
             }
 
             val value = redactTextNoteET.text.toString()
-            val position = redactCountTV.text.toString().toIntOrNull() ?: 0
+            val position = redactCountTV.text.toString().toIntOrNull()
 
 
             onData(value, position!!)
