@@ -38,7 +38,7 @@ class SecFragment : Fragment(),OnFragmentDataListener {
 
 
         redactTextNoteET.setText(text)
-        redactCountTV.setText(position.toString())
+        redactCountTV.setText((position?.plus(1)).toString())
 
 
 
@@ -46,12 +46,9 @@ class SecFragment : Fragment(),OnFragmentDataListener {
         redactBTN=view.findViewById(R.id.redactBTN)
         redactBTN.setOnClickListener {
 
-            if (redactTextNoteET.text.isEmpty()) {
-                return@setOnClickListener
-            }
 
             val value = redactTextNoteET.text.toString()
-            val position = redactCountTV.text.toString().toIntOrNull()
+            val position = redactCountTV.text.toString().toInt()
 
 
             onData(value, position!!)

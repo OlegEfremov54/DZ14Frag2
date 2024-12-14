@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity(),OnFragmentDataListener {
    override fun onData(data: String, index: Int) {
        val bundle=Bundle()
        bundle.putString("textMes", data)
+       bundle.putInt("position",index)
        val transaction = this.supportFragmentManager.beginTransaction()
        val secFragment = SecFragment()
        secFragment.arguments = bundle
